@@ -1,14 +1,13 @@
 <template>
   <div class="p-3 border-4 border-black">
-    <h1 class="font-bold mb-3">Roll the Gacha</h1>
+    <h1 class="font-bold mb-3">{{ title }}</h1>
     <BaseButton @click="handleRoll(RollTypes.SINGLE)" class="mr-3"
       >Single Roll</BaseButton
     >
     <BaseButton @click="handleRoll(RollTypes.MULTI)"
       >Multi (10) Roll</BaseButton
     >
-    <div class="mt-3">Gem Balance: {{ balance }}</div>
-    <div v-if="errorMessage" class="text-red-600 font-bold">
+    <div v-if="errorMessage" class="mt-3 text-red-600 font-bold">
       {{ errorMessage }}
     </div>
   </div>
@@ -30,6 +29,10 @@ export default {
       type: Number,
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
   },
 
   setup(props, context) {
@@ -37,7 +40,7 @@ export default {
 
     const chargeBalance = (cost) => {
       if (props.balance - cost < 0) {
-        errorMessage.value = 'Not enough credits';
+        errorMessage.value = 'Not enough gems';
       } else {
         errorMessage.value = '';
         context.emit('charge', cost);
