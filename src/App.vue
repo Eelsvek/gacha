@@ -1,17 +1,42 @@
 <template>
-  <div class="font-bold">Test: {{ name }}</div>
+  <div>
+    <h1 class="font-bold">Roll the Gacha</h1>
+    <BaseButton @click="handleRoll(RollTypes.SINGLE)" class="mr-3"
+      >Single Roll</BaseButton
+    >
+    <BaseButton @click="handleRoll(RollTypes.MULTI)"
+      >Multi (10) Roll</BaseButton
+    >
+  </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+// import { ref } from 'vue';
+import BaseButton from '@/components/Buttons/BaseButton';
+import { RollTypes } from '@/constants';
 
 export default {
   name: 'App',
+  components: {
+    BaseButton,
+  },
   setup() {
-    const name = ref('Kevin');
+    const handleRoll = (type) => {
+      switch (type) {
+        case RollTypes.SINGLE:
+          console.log('single');
+          break;
+        case RollTypes.MULTI:
+          console.log('multi');
+          break;
+        default:
+          break;
+      }
+    };
 
     return {
-      name,
+      handleRoll,
+      RollTypes,
     };
   },
 };
