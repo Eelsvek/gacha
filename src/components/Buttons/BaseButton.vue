@@ -1,10 +1,12 @@
 <template>
-  <button class="px-3 py-1 rounded-sm text-sm" :class="buttonClass">
+  <button :class="buttonClass">
     <slot />
   </button>
 </template>
 
 <script>
+const DEFAULT_BUTTON_STYLES = 'px-3 py-1 rounded-sm text-sm';
+
 const buttonTheme = (variant) => {
   switch (variant) {
     case 'primary':
@@ -23,10 +25,8 @@ export default {
   },
   setup(props) {
     return {
-      buttonClass: buttonTheme(props.variant),
+      buttonClass: `${DEFAULT_BUTTON_STYLES} ${buttonTheme(props.variant)}`,
     };
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
